@@ -1,0 +1,42 @@
+
+
+Microchip Technology PIC18 Macro Assembler V1.44 build -154322312 
+                                                                                                           Mon Oct 09 15:56:50 2017
+
+
+     1                           	processor	18F452
+     2                           	opt	pw 132
+     3  0000  0E4D               	movlw	77	; M
+     4  0002  6F80               	movwf	1152,b
+     5  0004  0E61               	movlw	97	; a
+     6  0006  6F81               	movwf	1153,b
+     7  0008  0E70               	movlw	112	; p
+     8  000A  6F82               	movwf	1154,b
+     9  000C  0E4E               	movlw	78	; N
+    10  000E  6F83               	movwf	1155,b
+    11  0010  0E61               	movlw	97	; a
+    12  0012  6F84               	movwf	1156,b
+    13  0014  0E6D               	movlw	109	; m
+    14  0016  6F85               	movwf	1157,b
+    15  0018  0E65               	movlw	101	; e
+    16  001A  6F86               	movwf	1158,b
+    17  001C  0E00               	movlw	0	; Null
+    18  001E  6F87               	movwf	1159,b
+    19  0020  0E07               	movlw	7
+    20  0022  EF00' F000'        	goto	sendMapChar
+    21  0026  EF00' F000'        	goto	invalidIndex
+    22  002A  EE04' F080         	lfsr	0,1152
+    23  002E  5100'              	movf	MapIndex,w,b
+    24  0030  5100'              	movf	PLUSW0,w,b
+    25  0032  0012               	return	
+    26  0034  0EFF               	movlw	255
+    27  0036  0012               	return	
+
+
+Microchip Technology PIC18 Macro Assembler V1.44 build -154322312 
+Symbol Table                                                                                               Mon Oct 09 15:56:50 2017
+
+                                            FSR0 000000*                                           PLUSW0 000000* 
+                                         MapName 000000                                      invalidIndex 000000* 
+                                        MapIndex 000000*                                      sendMapChar 000000* 
+                                      getMapChar 000000*                                       intMapName 000000* 
