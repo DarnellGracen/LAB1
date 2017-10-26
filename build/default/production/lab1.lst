@@ -1,15 +1,13 @@
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  1
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00001 ;label                  instruction                     operand                 comment
-                      00002 ;                       directive
-                      00003 
-                      00004                         LIST                            p=18f452                ;tell assembler what chi
-                            p we are using
-                      00005                         INCLUDE                         <p18f452.inc>
+                      00001 
+                      00002 
+                      00003                         LIST                            p=18f452                
+                      00004                         INCLUDE                         <p18f452.inc>
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -19,69 +17,64 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00007 ;==========================================================================
                       00008 
                       01254         LIST
-                      00006                                 
-                      00007 
-  0000                00008                         GLOBAL                          getMapChar,intMapName
-  0000                00009                         GLOBAL                          MapName 
-                      00010                         
-                      00011 grp0                    UDATA                           0x90
-000090                00012 MapName                 RES                             8
-                      00013                         CBLOCK                          0x90
-  00000090            00014                         MapName1
-  00000091            00015                         MapName2
-  00000092            00016                         MapName3
-  00000093            00017                         MapName4
-  00000094            00018                         MapName5
-  00000095            00019                         MapName6
-  00000096            00020                         MapName7
-                      00021                         ENDC
-                      00022                         
-  0000                00023                         EXTERN                          MapIndex
-                      00024 RST                     CODE                            0x80                    ;The code section named 
-                            RST
+                      00005                                 
+                      00006 
+  0000                00007                         GLOBAL                          getMapChar,PopulateMapName
+  0000                00008                         GLOBAL                          MapName 
+                      00009                         
+                      00010 grp0                    UDATA                           0x85
+000085                00011 MapName                 RES                             8
+                      00012                         CBLOCK                          0x85
+  00000085            00013                         MapIndex1
+  00000086            00014                         MapIndex2
+  00000087            00015                         MapIndex3
+  00000088            00016                         MapIndex4
+  00000089            00017                         MapIndex5
+  0000008A            00018                         MapIndex6
+  0000008B            00019                         MapIndex7
+                      00020                         ENDC
+                      00021                         
+  0000                00022                         EXTERN                          MapIndex
+                      00023 RST                     CODE                            0x80                    
 Message[312]: Page or Bank selection not needed for this device.  No code generated.
-                      00025                         pagesel                         getMapChar              ;Jumps to the location l
-                            abelled
-000080 EF?? F???      00026                         goto                            getMapChar
-                      00027 PGM                     CODE
-                      00028                                                 
-                      00029 
-000000                00030 intMapName              
-000000 0E54           00031                         movlw                           0x54
-000002 6F90           00032                         movwf                           MapName1
-000004 0E41           00033                         movlw                           0x41
-000006 6F91           00034                         movwf                           MapName2
-000008 0E50           00035                         movlw                           0x50
-00000A 6F92           00036                         movwf                           MapName3
-00000C 0E4F           00037                         movlw                           0x4F
-00000E 6F93           00038                         movwf                           MapName4
-000010 0E55           00039                         movlw                           0x55
-000012 6F94           00040                         movwf                           MapName5
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  2
+                      00024                         pagesel                         getMapChar              
+000080 EF?? F???      00025                         goto                            getMapChar
+                      00026 PGM                     CODE
+                      00027                                                 
+                      00028 
+000000                00029 PopulateMapName         
+000000 0E54           00030                         movlw                           0x54
+000002 6F85           00031                         movwf                           MapIndex1
+000004 0E41           00032                         movlw                           0x41
+000006 6F86           00033                         movwf                           MapIndex2
+000008 0E50           00034                         movlw                           0x50
+00000A 6F87           00035                         movwf                           MapIndex3
+00000C 0E4F           00036                         movlw                           0x4F
+00000E 6F88           00037                         movwf                           MapIndex4
+000010 0E55           00038                         movlw                           0x55
+000012 6F89           00039                         movwf                           MapIndex5
+000014 0E54           00040                         movlw                           0x54
+000016 6F8A           00041                         movwf                           MapIndex6
+000018 0E21           00042                         movlw                           0x21
+00001A 6F8B           00043                         movwf                           MapIndex7
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000014 0E54           00041                         movlw                           0x54
-000016 6F95           00042                         movwf                           MapName6
-000018 0E21           00043                         movlw                           0x21
-00001A 6F96           00044                         movwf                           MapName7
-00001C 0012           00045                         return
+00001C 0012           00044                         return
+                      00045                         
                       00046                         
-                      00047                         
-00001E                00048 getMapChar                      
-00001E EE?? F0??      00049                         lfsr                            0,MapName               ;load 12bit file address
-                             point to FSR0
-000022 50??           00050                         movf                            MapIndex,W              ;load MapIndex to WREG
-000024 26E9           00051                         addwf                           FSR0L,F                 ;add mapIndex to FSR0 lo
-                            w byte
-000026 50EF           00052                         movf                            INDF0,W                 ;load MapName[mapIndex] 
-                            to WREG
-000028 0012           00053                         return
-                      00054                 
-                      00055                         END
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  3
+00001E                00047 getMapChar                      
+00001E EE?? F0??      00048                         lfsr                            0,MapName               
+000022 50??           00049                         movf                            MapIndex,W              
+000024 26E9           00050                         addwf                           FSR0L,F                 
+000026 50EF           00051                         movf                            INDF0,W                 
+000028 0012           00052                         return
+                      00053                 
+                      00054                         END
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  3
 
 
 SYMBOL TABLE
@@ -140,7 +133,7 @@ CCP2IE                            00000000
 CCP2IF                            00000000
 CCP2IP                            00000000
 CCP2M0                            00000000
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  4
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  4
 
 
 SYMBOL TABLE
@@ -199,7 +192,7 @@ EEIF                              00000004
 EEIP                              00000004
 EEPGD                             00000007
 FAST                              00000001
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  5
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  5
 
 
 SYMBOL TABLE
@@ -258,7 +251,7 @@ INTCON1                           00000FF2
 INTCON2                           00000FF1
 INTCON3                           00000FF0
 INTEDG0                           00000006
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  6
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  6
 
 
 SYMBOL TABLE
@@ -317,7 +310,7 @@ LVDIN                             00000005
 LVDIP                             00000002
 LVDL0                             00000000
 LVDL1                             00000001
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  7
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  7
 
 
 SYMBOL TABLE
@@ -326,14 +319,14 @@ SYMBOL TABLE
 LVDL2                             00000002
 LVDL3                             00000003
 MapIndex                          00000000
-MapName                           00000090
-MapName1                          00000090
-MapName2                          00000091
-MapName3                          00000092
-MapName4                          00000093
-MapName5                          00000094
-MapName6                          00000095
-MapName7                          00000096
+MapIndex1                         00000085
+MapIndex2                         00000086
+MapIndex3                         00000087
+MapIndex4                         00000088
+MapIndex5                         00000089
+MapIndex6                         0000008A
+MapIndex7                         0000008B
+MapName                           00000085
 N                                 00000004
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
@@ -376,7 +369,7 @@ PIE1                              00000F9D
 PIE2                              00000FA0
 PIR1                              00000F9E
 PIR2                              00000FA1
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  8
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  8
 
 
 SYMBOL TABLE
@@ -417,6 +410,7 @@ PSPIE                             00000007
 PSPIF                             00000007
 PSPIP                             00000007
 PSPMODE                           00000004
+PopulateMapName                   00000000
 R                                 00000002
 RA0                               00000000
 RA1                               00000001
@@ -434,13 +428,13 @@ RB5                               00000005
 RB6                               00000006
 RB7                               00000007
 RBIE                              00000003
-RBIF                              00000000
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE  9
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RBIF                              00000000
 RBIP                              00000000
 RBPU                              00000007
 RC0                               00000000
@@ -493,13 +487,13 @@ SEN                               00000000
 SMP                               00000007
 SP0                               00000000
 SP1                               00000001
-SP2                               00000002
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE 10
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SP2                               00000002
 SP3                               00000003
 SP4                               00000004
 SPBRG                             00000FAF
@@ -552,13 +546,13 @@ T1INSYNC                          00000002
 T1OSCEN                           00000003
 T1OSI                             00000001
 T1OSO                             00000000
-T1SYNC                            00000002
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE 11
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000FCA
@@ -611,13 +605,13 @@ TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
-TRISA                             00000F92
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE 12
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISA                             00000F92
 TRISA0                            00000000
 TRISA1                            00000001
 TRISA2                            00000002
@@ -670,13 +664,13 @@ TXREG                             00000FAD
 TXSTA                             00000FAC
 UA                                00000001
 VREFM                             00000002
-VREFP                             00000003
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE 13
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+VREFP                             00000003
 W                                 00000000
 WCOL                              00000007
 WDTCON                            00000FD1
@@ -729,13 +723,13 @@ _EBTR1_OFF_7L                     000000FF
 _EBTR1_ON_7L                      000000FD
 _EBTR2_OFF_7L                     000000FF
 _EBTR2_ON_7L                      000000FB
-_EBTR3_OFF_7L                     000000FF
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE 14
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_EBTR3_OFF_7L                     000000FF
 _EBTR3_ON_7L                      000000F7
 _EBTRB_OFF_7H                     000000FF
 _EBTRB_ON_7H                      000000BF
@@ -788,13 +782,13 @@ _WRT2_ON_6L                       000000FB
 _WRT3_OFF_6L                      000000FF
 _WRT3_ON_6L                       000000F7
 _WRTB_OFF_6H                      000000FF
-_WRTB_ON_6H                       000000BF
-MPASM 5.54                          LAB1.ASM   10-24-2017  21:23:55         PAGE 15
+MPASM 5.54                          LAB1.ASM   10-25-2017  19:13:51         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_WRTB_ON_6H                       000000BF
 _WRTC_OFF_6H                      000000FF
 _WRTC_ON_6H                       000000DF
 _WRTD_OFF_6H                      000000FF
@@ -803,7 +797,6 @@ _XT_OSC                           000000F9
 _XT_OSC_1H                        000000F9
 __18F452                          00000001
 getMapChar                        0000001E
-intMapName                        00000000
 
 Errors   :     0
 Warnings :     0 reported,     0 suppressed

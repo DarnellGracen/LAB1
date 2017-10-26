@@ -9,7 +9,7 @@
 #pragma config LVP = OFF //Disable low voltage programming
 
 unsigned int MapIndex = 0;
-extern void intMapName(void);
+extern void PopulateMapName(void);
 extern char getMapChar(void);
 extern char MapName;
 char grpName[7];
@@ -53,7 +53,7 @@ void main(void){
     
     PORTD = 0X00;
     TRISD = 0x00;
-    intMapName();
+    PopulateMapName();
     populate_array();
     init_lcd();
     while(1){
